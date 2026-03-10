@@ -1,6 +1,5 @@
 fastapi
 uvicorn[standard]
-statsforecast
-pandas
 numpy
+pandas
 pydantic
