@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
+from datetime import datetime
 import numpy as np
 
 app = FastAPI(title="Forecast API - Substituto TimeGPT")
@@ -82,7 +83,11 @@ def holt_winters_forecast(values: List[float], h: int, season_length: int = 12) 
 
 @app.get("/")
 def health_check():
-    return {"status": "ok", "message": "Forecast API rodando"}
+    return {
+        "status": "ok",
+        "message": "Forecast API rodando",
+        "timestamp": datetime.utcnow().isoformat()
+    }
 
 @app.post("/v2/forecast", response_model=ForecastResponse)
 def forecast(req: ForecastRequest):
